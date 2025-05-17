@@ -36,7 +36,7 @@ def load_movies():
     df = pd.read_csv("Dataset/netflix_titles.csv")[['show_id', 'title', 'release_year', 'listed_in', 'rating', 'description']]
 
     # Renombramos las columnas para que sean mas faciles de entender
-    df.columns = ['id', 'title', 'year', 'category', 'rating', 'description']
+    df.columns = ['id', 'title', 'year', 'category', 'rating', 'overview']
 
     # Llenamos los espacios vacios con texto vacio y convertimos los datos en una lista de diccionarios
     return df.fillna('').to_dict(orient='records')
@@ -49,3 +49,6 @@ movies_list = load_movies()
 def get_synonyms(word):
     # Usamos wordnet para encontrar distintas palabras que significan lo mismo.
     return {lemma.name().lower() for syn in wordnet.synsets(word) for lemma in syn.lemmas()}
+
+# Creamos la aplicación FastAPI, qe sera el motor de nuestra API.
+# Esto inicializa la API con un nombre y una version.
