@@ -52,3 +52,12 @@ def get_synonyms(word):
 
 # Creamos la aplicación FastAPI, qe sera el motor de nuestra API.
 # Esto inicializa la API con un nombre y una version.
+app = FastAPI(title='Mi app de peliculas', version='1.0.0')
+
+@app.get('/', tags=['Home'])
+def home():
+    # Cuando entremos en el navegador a http://lo127.0.0.1:8000/ nos mostrara un mensaje de bienvenida.
+    return HTMLResponse('<h1> Bienvenido a la API de peliculas </h1>')
+
+# CON ESTE COMANDO EJECUTO LA APP:
+# uvicorn main:app --reload --port 5000
