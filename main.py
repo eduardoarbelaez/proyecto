@@ -61,3 +61,20 @@ def home():
 
 # CON ESTE COMANDO EJECUTO LA APP:
 # uvicorn main:app --reload --port 5000
+
+# Y ASI ENTRO EN LA DOCUMENTACION DE LA API SWAGGER:
+# http://127.0.0.1:5000/docs
+
+# Obteniendo la lista de películas
+# Creamos una ruta para obtener todas las películas
+# Ruta para obtener todas las películas
+@app.get('/movies', tags=['Movies'])
+def get_movies():
+    # Si hay películas, las enviamos, si no mostramos un error
+    return movies_list or HTMLResponse(status_code=500, detail="No hay datos de películas disponibles")
+
+# ruta para obtener una película específica por su ID
+@app.get('/movies/{id}', tags=['Movies'])
+def get_movies(id: str):
+    # buscamos en la lista de películas la que tenga el mismo ID
+    return next((m for m in movies_list if m ['id'] == id), {"detalle": "película no encontrada"})
